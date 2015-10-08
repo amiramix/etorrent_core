@@ -9,7 +9,7 @@
 
 -compile({no_auto_import,[monitor/2, demonitor/1]}).
 
--type monitorset() :: gb_tree().
+-type monitorset() :: gb_tree:tree().
 -export_type([monitorset/0]).
 
 %% @doc

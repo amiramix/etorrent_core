@@ -75,8 +75,8 @@
 
 -record(state, {
     socket :: inet:socket(),
-    sent   :: gb_tree(),
-    tokens :: queue()
+    sent   :: gb_tree:tree(),
+    tokens :: queue:queue()
 }).
 
 %

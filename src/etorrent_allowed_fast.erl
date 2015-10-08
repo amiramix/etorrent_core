@@ -23,7 +23,7 @@
 %% @end
 -type ip() :: {integer(), integer(), integer(), integer()}.
 -spec allowed_fast(integer(), ip() | binary(), integer(), binary()) ->
-                          {value, set()}.
+                          {value, set:set()}.
 allowed_fast(Sz, {B1, B2, B3, B4}, K, InfoHash) ->
     B = <<B1:8/integer, B2:8/integer, B3:8/integer, B4:8/integer>>,
     allowed_fast(Sz, B, K, InfoHash);

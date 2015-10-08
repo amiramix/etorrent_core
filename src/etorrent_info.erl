@@ -71,7 +71,7 @@
     torrent_name :: binary(),
     tracker_tiers :: [[binary()]],
     torrent :: torrent_id(),
-    static_file_info :: array(),
+    static_file_info :: array:array(),
     directories :: [file_id()], %% usorted
     total_size :: non_neg_integer(),
     piece_size :: non_neg_integer(),

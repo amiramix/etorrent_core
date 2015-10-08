@@ -86,7 +86,7 @@
 
 -define(SERVER, ?MODULE).
 -define(TAB, ?MODULE).
--record(state, { monitoring :: dict() }).
+-record(state, { monitoring :: dict:dict() }).
 
 %% ====================================================================
 

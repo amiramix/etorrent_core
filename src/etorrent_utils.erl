@@ -64,7 +64,7 @@ gsplit(N, [H|T], Rest) ->
 %%   and thus the function is quite ineffective. We can build a much
 %%   much faster version if we create our own queues.
 %% @end
--spec queue_remove(term(), queue()) -> queue().
+-spec queue_remove(term(), queue:queue()) -> queue:queue().
 queue_remove(Item, Q) ->
     QList = queue:to_list(Q),
     List = lists:delete(Item, QList),

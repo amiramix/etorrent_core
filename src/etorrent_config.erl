@@ -46,7 +46,7 @@
      terminate/2, code_change/3]).
 
 -type file_path() :: etorrent_types:file_path().
--record(state, { conf :: dict() }).
+-record(state, { conf :: dict:dict() }).
 
 configuration_specification() ->
     [required(dir),

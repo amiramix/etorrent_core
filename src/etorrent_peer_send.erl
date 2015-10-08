@@ -54,7 +54,7 @@
 
 -record(state, {
     socket     :: inet:socket(),
-    buffer     :: queue(),
+    buffer     :: queue:queue(),
     control    :: pid(),
     limiter    :: none | pid(),
     rate       :: etorrent_rate:rate(),

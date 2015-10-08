@@ -44,7 +44,7 @@
 -record(requestqueue, {
     low_limit  :: non_neg_integer(),
     high_limit :: pos_integer(),
-    queue      :: queue()}).
+    queue      :: queue:queue()}).
 -opaque rqueue() :: #requestqueue{}.
 -export_type([rqueue/0]).
 

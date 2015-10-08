@@ -21,11 +21,11 @@
 %% Name as atom => remote id
 
 -record(exts, {
-        local_id2name      :: tuple(ext_name()),
-        local_id2mod_name  :: tuple(ext_name()),
+        local_id2name      :: {ext_name()},
+        local_id2mod_name  :: {ext_name()},
         bnames :: ordsets:ordset(ext_bname()),
         mod_names :: ordsets:ordset(ext_mod_name()),
-        supported_name2remote_id_and_mod_name :: dict(),
+        supported_name2remote_id_and_mod_name :: dict:dict(),
         all_bname2remote_id = orddict:new() :: orddict:orddict(),
         m :: list({ext_bname(), ext_id()})
 }).

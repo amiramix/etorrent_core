@@ -98,7 +98,7 @@
 
 -record(state, {
     torrent :: torrent_id(),
-    pieces  :: array(),
+    pieces  :: array:array(),
     file_list :: [{string(), pos_integer()}],
     files_open :: list(#io_file{}),
     files_max  :: pos_integer()}).

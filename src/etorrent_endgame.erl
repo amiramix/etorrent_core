@@ -30,9 +30,9 @@
     torrent_id = exit(required) :: torrent_id(),
     pending    = exit(required) :: pid(),
     %% will be initially filled by messages from the pending process.
-    assigned   = exit(required) :: gb_tree(),
-    fetched    = exit(required) :: gb_tree(),
-    stored     = exit(required) :: gb_set()}).
+    assigned   = exit(required) :: gb_tree:tree(),
+    fetched    = exit(required) :: gb_tree:tree(),
+    stored     = exit(required) :: gb_set:set()}).
 
 
 server_name(TorrentID) ->
@@ -230,77 +230,77 @@ code_change(_, State, _) ->
 
 
 %% @doc Get the list of all assigned chunks
--spec get_assigned(gb_tree()) -> [chunkspec()].
+-spec get_assigned(gb_tree:tree()) -> [chunkspec()].
 get_assigned(Assigned) ->
     gb_trees:keys(Assigned).
 
 %% @doc Get the list of peers that has been assigned a chunk
--spec get_assigned(chunkspec(), gb_tree()) -> [pid()].
+-spec get_assigned(chunkspec(), gb_tree:tree()) -> [pid()].
 get_assigned(Chunk, Assigned) ->
     gb_trees:get(Chunk, Assigned).
 
 %% @doc Check if a peer has been assigned a chunk
--spec has_assigned(chunkspec(), pid(), gb_tree()) -> boolean().
+-spec has_assigned(chunkspec(), pid(), gb_tree:tree()) -> boolean().
 has_assigned(Chunk, Pid, Assigned) ->
     has_peer(Chunk, Pid, Assigned).
 
--spec add_assigned(chunkspec(), gb_tree()) -> gb_tree().
+-spec add_assigned(chunkspec(), gb_tree:tree()) -> gb_tree:tree().
 add_assigned(Chunk, Assigned) ->
     gb_trees:insert(Chunk, [], Assigned).
 
 %% @doc Append a peer to the list of peers that has been assigned a chunk
--spec add_assigned(chunkspec(), pid(), gb_tree()) -> gb_tree().
+-spec add_assigned(chunkspec(), pid(), gb_tree:tree()) -> gb_tree:tree().
 add_assigned(Chunk, Pid, Assigned) ->
     add_peer(Chunk, Pid, Assigned).
 
 %% @doc Delete a peer from the list of peers that has been assigned a chunk
--spec del_assigned(chunkspec(), pid(), gb_tree()) -> gb_tree().
+-spec del_assigned(chunkspec(), pid(), gb_tree:tree()) -> gb_tree:tree().
 del_assigned(Chunk, Pid, Assigned) ->
     del_peer(Chunk, Pid, Assigned).
 
 %% @doc Delete all peers from the list of peers that has been assigned a chunk
--spec del_assigned(chunkspec(), gb_tree()) -> gb_tree().
+-spec del_assigned(chunkspec(), gb_tree:tree()) -> gb_tree:tree().
 del_assigned(Chunk, Assigned) ->
     gb_trees:delete(Chunk, Assigned).
 
 %% @doc Append a peer to the list of peers that has fetched a chunk
--spec add_fetched(chunkspec(), pid(), gb_tree()) -> gb_tree().
+-spec add_fetched(chunkspec(), pid(), gb_tree:tree()) -> gb_tree:tree().
 add_fetched(Chunk, Pid, Fetched) ->
     add_peer(Chunk, Pid, Fetched).
 
 %% @doc Delete a peer from the list of peers that has fetched a chunk
--spec del_fetched(chunkspec(), pid(), gb_tree()) -> gb_tree().
+-spec del_fetched(chunkspec(), pid(), gb_tree:tree()) -> gb_tree:tree().
 del_fetched(Chunk, Pid, Fetched) ->
     del_peer(Chunk, Pid, Fetched).
 
 %% @doc Check if a chunk is a member of the set of fetched chunks
--spec is_fetched(chunkspec(), gb_tree()) -> boolean().
+-spec is_fetched(chunkspec(), gb_tree:tree()) -> boolean().
 is_fetched(Chunk, Fetched) ->
     gb_trees:is_defined(Chunk, Fetched)
     andalso length(gb_trees:get(Chunk, Fetched)) > 0.
 
 %% @doc Check if a peer has fetched a chunk
--spec has_fetched(chunkspec(), pid(), gb_tree()) -> boolean().
+-spec has_fetched(chunkspec(), pid(), gb_tree:tree()) -> boolean().
 has_fetched(Chunk, Pid, Fetched) ->
     has_peer(Chunk, Pid, Fetched).
 
 
 %% @doc Add a chunk to the set of stored chunks
--spec add_stored(chunkspec(), gb_set()) -> gb_set().
+-spec add_stored(chunkspec(), gb_set:set()) -> gb_set:set().
 add_stored(Chunk, Stored) ->
     gb_sets:insert(Chunk, Stored).
 
 %% @doc Check if a chunk is a member of the set of stored chunks
--spec is_stored(chunkspec(), gb_set()) -> boolean().
+-spec is_stored(chunkspec(), gb_set:set()) -> boolean().
 is_stored(Chunk, Stored) ->
     gb_sets:is_member(Chunk, Stored).
 
--spec is_assigned(chunkspec(), gb_tree()) -> boolean().
+-spec is_assigned(chunkspec(), gb_tree:tree()) -> boolean().
 is_assigned(Chunk, Assigned) ->
     gb_trees:is_defined(Chunk, Assigned).
 
 %% @doc Add a peer to a set of peers that are associated with a chunk
--spec add_peer(chunkspec(), pid(), gb_tree()) -> gb_tree().
+-spec add_peer(chunkspec(), pid(), gb_tree:tree()) -> gb_tree:tree().
 add_peer(Chunk, Pid, Requests) ->
     case gb_trees:lookup(Chunk, Requests) of
         none ->
@@ -312,7 +312,7 @@ add_peer(Chunk, Pid, Requests) ->
     end.
 
 %% @doc Delete a peer from a set of peers associated with a chunk
--spec del_peer(chunkspec(), pid(), gb_tree()) -> gb_tree().
+-spec del_peer(chunkspec(), pid(), gb_tree:tree()) -> gb_tree:tree().
 del_peer(Chunk, Pid, Requests) ->
     case gb_trees:lookup(Chunk, Requests) of
         none ->
@@ -323,7 +323,7 @@ del_peer(Chunk, Pid, Requests) ->
     end.
 
 %% @doc Check if a peer is a member of the set of peers associated with a chunk
--spec has_peer(chunkspec(), pid(), gb_tree()) -> boolean().
+-spec has_peer(chunkspec(), pid(), gb_tree:tree()) -> boolean().
 has_peer(Chunk, Pid, Requests) ->
     gb_trees:is_defined(Chunk, Requests)
     andalso lists:member(Pid, gb_trees:get(Chunk, Requests)).

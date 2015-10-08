@@ -87,7 +87,7 @@
                        info_hash :: '_' | binary() | 'unknown',
                        state :: '_' | tracking_map_state()}).
 
--record(state, { monitoring :: dict() }).
+-record(state, { monitoring :: dict:dict() }).
 
 -define(SERVER, ?MODULE).
 

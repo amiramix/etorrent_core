@@ -124,8 +124,8 @@
     pieces_stored     :: pieceset(),
     pieces_unwanted   :: pieceset(),
     %% Chunk sets for pieces
-    chunks_assigned :: array(),
-    chunks_stored   :: array(),
+    chunks_assigned :: array:array(),
+    chunks_stored   :: array:array(),
     %% Piece priority lists
     piece_priority  :: #pieceprio{},
     %% Chunk assignment processes
