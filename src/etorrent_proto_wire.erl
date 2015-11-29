@@ -6,7 +6,7 @@
 %% @end
 -module(etorrent_proto_wire).
 
--include("etorrent_version.hrl").
+-include_lib("etorrent_core/include/etorrent_version.hrl").
 
 -ifdef(TEST).
 -include_lib("proper/include/proper.hrl").

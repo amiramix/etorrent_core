@@ -9,7 +9,7 @@
 %% @end
 -module(etorrent_peer_states).
 
--include("etorrent_rate.hrl").
+-include_lib("etorrent_core/include/etorrent_rate.hrl").
 
 -behaviour(gen_server).
 

@@ -14,7 +14,7 @@
 -module(etorrent_peer_recv).
 -behaviour(gen_server).
 
--include("etorrent_rate.hrl").
+-include_lib("etorrent_core/include/etorrent_rate.hrl").
 
 %% exported functions
 -export([start_link/2,

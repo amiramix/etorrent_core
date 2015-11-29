@@ -12,7 +12,7 @@
 
 -behaviour(gen_server).
 
--include("etorrent_rate.hrl").
+-include_lib("etorrent_core/include/etorrent_rate.hrl").
 
 %% API
 -export([start_link/8,

@@ -15,7 +15,7 @@
 %% API
 -export([init/0, init/1, update/2, format_eta/2]).
 
--include("etorrent_rate.hrl").
+-include_lib("etorrent_core/include/etorrent_rate.hrl").
 
 -type rate() :: #peer_rate{}.
 -export_type([rate/0]).

@@ -7,7 +7,7 @@
 -module(etorrent_app).
 -behaviour(application).
 
--include("etorrent_version.hrl").
+-include_lib("etorrent_core/include/etorrent_version.hrl").
 
 %% API
 -export([start/0, start/1, stop/0]).

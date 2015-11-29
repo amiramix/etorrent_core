@@ -14,7 +14,7 @@
 -module(etorrent_peer_send).
 -behaviour(gen_server).
 
--include("etorrent_rate.hrl").
+-include_lib("etorrent_core/include/etorrent_rate.hrl").
 
 %% Apart from standard gen_server things, the main idea of this module is
 %% to serve as a mediator for the peer in the send direction. Precisely,

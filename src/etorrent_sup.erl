@@ -9,7 +9,7 @@
 
 -behaviour(supervisor).
 
--include("supervisor.hrl").
+-include_lib("etorrent_core/include/supervisor.hrl").
 
 %% API
 -export([start_link/1]).

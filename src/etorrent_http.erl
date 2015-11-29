@@ -11,7 +11,7 @@
 %% @end
 -module(etorrent_http).
 
--include("etorrent_version.hrl").
+-include_lib("etorrent_core/include/etorrent_version.hrl").
 %% API
 -export([request/1, build_encoded_form_rfc1738/1, mk_header/1]).
 
